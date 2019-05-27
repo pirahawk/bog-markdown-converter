@@ -1,0 +1,24 @@
+{
+  "name": "bog-markdown-converter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pirahawk/bog-markdown-converter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pirahawk/bog-markdown-converter/issues"
+  },
+  "homepage": "https://github.com/pirahawk/bog-markdown-converter#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "markdown-it": "^8.4.2"
+  }
+}
