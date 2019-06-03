@@ -1,5 +1,4 @@
-// import { Bootstrapper } from "./bootstrapper";
-import bootstrapper = require("./bootstrapper");
+import { Bootstrapper } from "./server";
 
-let startup = new bootstrapper.Bootstrapper();
+let startup = new Bootstrapper();
 startup.run();
