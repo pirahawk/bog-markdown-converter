@@ -1,4 +1,4 @@
-import { Bootstrapper } from "./server";
+import { MarkdownStartup } from "./markdownStartup";
 
-let startup = new Bootstrapper();
+let startup = new MarkdownStartup();
 startup.run();
