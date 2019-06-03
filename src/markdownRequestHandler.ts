@@ -4,3 +4,10 @@ export class MarkdownRequestHandler implements IHttpRouteHandler {
         response.send('hello');
     }
 }
+
+export class NoContentHandler implements IHttpRouteHandler{
+    handle(request: any, response: any): void {
+        response.status(204);
+        response.send();
+    }
+}
