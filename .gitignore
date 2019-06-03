@@ -1,1 +1,4 @@
+# folders
 node_modules
+bin
+.vscode
