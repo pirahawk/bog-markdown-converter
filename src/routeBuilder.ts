@@ -1,8 +1,10 @@
 import { RouteHelper } from "./routeHelper";
 import { MarkdownRequestHandler, NoContentHandler } from "./markdownRequestHandler";
+import {Express} from 'express';
+
 
 export class RouteBuilder {
-    static configure(app: any): void {
+    static configure(app: Express): void {
         let helper: RouteHelper = new RouteHelper(app);
 
         helper.mapGet("/", new NoContentHandler());

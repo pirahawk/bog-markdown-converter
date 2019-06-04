@@ -1,14 +1,16 @@
 import { IHttpRouteHandler } from "./iHttpRouteHandler";
+import {Express, Request, Response} from 'express';
+
 export class RouteHelper {
     
-    constructor(private app: any) { }
+    constructor(private app: Express) { }
     
     public mapGet(routeTemplate: string, handler: IHttpRouteHandler): void {
         if (!routeTemplate || !handler) {
             throw Error('Route map arguments cannot be null');
         }
 
-        this.app.get(routeTemplate, (request: any, response: any) => {
+        this.app.get(routeTemplate, (request: Request, response: Response) => {
             handler.handle(request, response);
         });
     }
@@ -18,7 +20,7 @@ export class RouteHelper {
             throw Error('Route map arguments cannot be null');
         }
 
-        this.app.post(routeTemplate, (request: any, response: any) => {
+        this.app.post(routeTemplate, (request: Request, response: Response) => {
             handler.handle(request, response);
         });
     }
