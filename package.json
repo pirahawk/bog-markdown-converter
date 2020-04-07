@@ -1,0 +1,32 @@
+{
+  "name": "bog-markdown-converter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pirahawk/bog-markdown-converter.git"
+  },
+  "keywords": [],
+  "author": "Piran Tata",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pirahawk/bog-markdown-converter/issues"
+  },
+  "homepage": "https://github.com/pirahawk/bog-markdown-converter#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.4",
+    "@types/markdown-it": "0.0.9",
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "markdown-it": "^10.0.0"
+  }
+}
