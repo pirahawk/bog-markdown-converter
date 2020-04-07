@@ -1,10 +1,12 @@
 
-export class Foo{
-    public bar():void{
-        console.log('hello there');
-    }
-}
+//import * as express from "express";
 
+import { ServerConfiguration } from "./core/ServerConfiguration";
 
-let test = new Foo();
-test.bar();
+let express = require('express');
+let app = express();
+let config:ServerConfiguration = {
+    port: 3000
+};
+
+app.listen(config.port, ()=> console.log(`App has Started!!!`));
