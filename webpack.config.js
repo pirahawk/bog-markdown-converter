@@ -1,3 +1,6 @@
+// unfortunately this does not seem to work for the time being!
+
+
 var path = require('path');
 
 module.exports = {
@@ -19,5 +22,12 @@ module.exports = {
 
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
-    }
+    },
+
+    node: {
+        fs: "empty",
+        net: 'empty',
+        tls: 'empty',
+        dns: 'empty'
+     }
 }
