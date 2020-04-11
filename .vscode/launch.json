@@ -12,6 +12,9 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\bin\\index.js",
+            "env": {
+                "EXPRESS_PORT": "4928"
+            },
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]
