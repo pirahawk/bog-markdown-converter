@@ -6,7 +6,16 @@ export class RouteBuilder {
         if (!expressApp) {
             throw new Error("expressApp is null");
         }
+
         this.mapRoute(expressApp.get, expressApp, routeTemplate, handler);
+    }
+
+    public post(routeTemplate: string, expressApp: express.Application, handler: IBogRouteHandler): void {
+        if (!expressApp) {
+            throw new Error("expressApp is null");
+        }
+        
+        this.mapRoute(expressApp.post, expressApp, routeTemplate, handler);
     }
 
     private mapRoute(
