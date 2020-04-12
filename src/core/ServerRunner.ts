@@ -11,9 +11,6 @@ export class ServerRunner {
     private expressApp: express.Application;
     private nodeServer: http.Server;
 
-    /**
-     *
-     */
     constructor() {
         this.expressApp = {} as unknown as express.Application;
         this.nodeServer = {} as unknown as http.Server;
