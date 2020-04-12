@@ -1,6 +1,8 @@
 import { ServerConfiguration } from "./ServerConfiguration";
 import * as express from "express";
 import * as bodyParser from "body-parser";
+import { RouteBuilder } from "./RouteBuilder";
+import { PingRouteHandler } from "../handlers/PingRouteHandler";
 
 export class ServerStartup {
     
@@ -13,16 +15,20 @@ export class ServerStartup {
         expressApp.use(bodyParser.text());
     }
 
-    public configure(expressApp: express.Application) {
-        expressApp.get("/", (req, resp)=>{
-            resp.status(204);
-            resp.send();
-        })
+    public configure(expressApp: express.Application, routeBuilder:RouteBuilder) {
+       
+       routeBuilder.get("/", expressApp, new PingRouteHandler());
 
-        expressApp.post("/", (req, resp)=>{
-            let test = req.body;
-            resp.status(204);
-            resp.send();
-        })
+        // expressApp.get("/", (req, resp)=>{
+        //     resp.status(204);
+        //     resp.send();
+        // })
+
+        // expressApp.post("/", (req, resp)=>{
+        //     let test = req.body;
+        //     resp.status(204);
+        //     resp.send();
+        // })
     }
 }
+
