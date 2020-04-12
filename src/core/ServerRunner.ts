@@ -4,6 +4,7 @@ import * as http from "http";
 import { ServerConfiguration } from "./ServerConfiguration";
 import { ServerStartup } from "./ServerStartup";
 import { RouteBuilder } from "./RouteBuilder";
+import { MarkdownOptions } from "../markdownIt/MarkdownOptions";
 
 export class ServerRunner {
    
@@ -18,14 +19,14 @@ export class ServerRunner {
         this.nodeServer = {} as unknown as http.Server;
     }
 
-    public run(configuration: ServerConfiguration): void {
+    public run(configuration: ServerConfiguration, markdownOptions: MarkdownOptions): void {
         if (!configuration) {
             return;
         }
 
         let express = require('express');
         this.expressApp = express();
-        let startup = new ServerStartup(configuration);
+        let startup = new ServerStartup(configuration, markdownOptions);
         let routebuilder = new RouteBuilder();
 
         startup.setup(this.expressApp);

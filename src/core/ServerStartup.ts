@@ -3,16 +3,21 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import { RouteBuilder } from "./RouteBuilder";
 import { PingRouteHandler } from "../handlers/PingRouteHandler";
+import { MarkdownFactory } from "../markdownIt/MarkdownFactory";
+import { MarkdownBase } from "../markdownIt/MarkdownBase";
+import { MarkdownOptions } from "../markdownIt/MarkdownOptions";
 
 export class ServerStartup {
-    
-    constructor(private configuration:ServerConfiguration) {
+    private markdownIt?: MarkdownBase;
+
+    constructor(private configuration:ServerConfiguration, private markdownOptions: MarkdownOptions) {
     }
 
     public setup(expressApp: express.Application):void{
         expressApp.use(bodyParser.urlencoded());
         expressApp.use(bodyParser.json());
         expressApp.use(bodyParser.text());
+        this.markdownIt = new MarkdownFactory().build(this.markdownOptions);
     }
 
     public configure(expressApp: express.Application, routeBuilder:RouteBuilder) {
