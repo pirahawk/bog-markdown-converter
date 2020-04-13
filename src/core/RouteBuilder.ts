@@ -2,7 +2,7 @@ import * as express from "express";
 import { IBogRouteHandler } from "./IBogRouteHandler";
 
 export class RouteBuilder {
-    public get(routeTemplate: string, expressApp: express.Application, handler: IBogRouteHandler): void {
+    public get(routeTemplate: string | RegExp, expressApp: express.Application, handler: IBogRouteHandler): void {
         if (!expressApp) {
             throw new Error("expressApp is null");
         }
@@ -10,7 +10,7 @@ export class RouteBuilder {
         this.mapRoute(expressApp.get, expressApp, routeTemplate, handler);
     }
 
-    public post(routeTemplate: string, expressApp: express.Application, handler: IBogRouteHandler): void {
+    public post(routeTemplate: string | RegExp, expressApp: express.Application, handler: IBogRouteHandler): void {
         if (!expressApp) {
             throw new Error("expressApp is null");
         }
@@ -19,9 +19,9 @@ export class RouteBuilder {
     }
 
     private mapRoute(
-        appFunction: (template: string, handlerFunction: (request: express.Request, response: express.Response) => void) => void, 
+        appFunction: (template: string | RegExp, handlerFunction: (request: express.Request, response: express.Response) => void) => void, 
         expressApp: express.Application,
-        routeTemplate: string, 
+        routeTemplate: string | RegExp, 
         handler: IBogRouteHandler): void {
 
         if (!routeTemplate) {

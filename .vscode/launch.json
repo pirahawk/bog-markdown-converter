@@ -13,7 +13,9 @@
             ],
             "program": "${workspaceFolder}\\bin\\index.js",
             "env": {
-                "EXPRESS_PORT": "4928"
+                "EXPRESS_PORT": "4928",
+                "BOG_API_HOST": "localhost:5000",
+                "BOG_API_SCHEME": "http"
             },
             "outFiles": [
                 "${workspaceFolder}/**/*.js"

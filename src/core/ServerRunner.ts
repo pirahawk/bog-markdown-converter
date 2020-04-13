@@ -4,7 +4,7 @@ import * as http from "http";
 import { ServerConfiguration } from "./ServerConfiguration";
 import { ServerStartup } from "./ServerStartup";
 import { RouteBuilder } from "./RouteBuilder";
-import { MarkdownOptions } from "../markdownIt/MarkdownOptions";
+import { BogMarkdownOptions } from "../markdownIt/MarkdownOptions";
 
 export class ServerRunner {
    
@@ -16,7 +16,7 @@ export class ServerRunner {
         this.nodeServer = {} as unknown as http.Server;
     }
 
-    public run(configuration: ServerConfiguration, markdownOptions: MarkdownOptions): void {
+    public run(configuration: ServerConfiguration, markdownOptions: BogMarkdownOptions): void {
         if (!configuration) {
             return;
         }

@@ -1,6 +1,6 @@
 import * as markdownIt from "markdown-it";
 
-export class MarkdownOptions implements markdownIt.Options {
+export class BogMarkdownOptions implements markdownIt.Options {
     html?: boolean;
     xhtmlOut?: boolean;
     breaks?: boolean;
@@ -9,4 +9,6 @@ export class MarkdownOptions implements markdownIt.Options {
     typographer?: boolean;
     quotes?: string;
     highlight?: (str: string, lang: string) => void;
+    bogApiHost?: string;
+    bogApiScheme?: string;
 }
