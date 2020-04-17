@@ -11,4 +11,8 @@ export class BogMarkdownOptions implements markdownIt.Options {
     highlight?: (str: string, lang: string) => void;
     bogApiHost?: string;
     bogApiScheme?: string;
+
+    get bogApiUrl():string{
+        return `${this.bogApiScheme}://${this.bogApiHost}`;
+    }
 }

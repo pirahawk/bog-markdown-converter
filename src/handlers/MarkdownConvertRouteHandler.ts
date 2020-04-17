@@ -7,16 +7,20 @@ export class MarkdownConvertRouteHandler implements IBogRouteHandler {
     constructor(private markdownFactory: MarkdownFactory) {}
 
     handle(request: express.Request, response: express.Response): void {
-        if(!request.body){
+        if(!request.body || !request.params || !request.params.articleId){
             response.statusCode = 400;
             response.send();    
         }
 
+        let articleId = request.params.articleId as string;
         let requestContent = request.body as string;
-        let markdownItBase = this.markdownFactory.build();
-        let renderedContent = markdownItBase.render(requestContent);
         
-        response.contentType('text/html')
-        response.send(renderedContent);
+        this.markdownFactory.buildForArticle(articleId).then((markdownItBase)=>{
+
+            let renderedContent = markdownItBase.render(requestContent);
+            
+            response.contentType('text/html');
+            response.send(renderedContent);
+        });
     }
 }

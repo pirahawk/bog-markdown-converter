@@ -1,18 +1,34 @@
 import MarkdownIt from "markdown-it";
 import { BogMarkdownOptions } from "./MarkdownOptions";
 import { MarkdownBase } from "./MarkdownBase";
+import { IArticleDetailsResolver } from "../domain/coordinators/IArticleDetailsResolver";
+import { forkJoin} from 'rxjs';
 
 export class MarkdownFactory{
-    private get bogApiHostUrl():string{
-        let url = `${this.markdownOptions.bogApiScheme}://${this.markdownOptions.bogApiHost}`;
-        return url;
-    }
+    constructor(private markdownOptions:BogMarkdownOptions, private entryResolvers:IArticleDetailsResolver[]) {}
 
-    constructor(private markdownOptions:BogMarkdownOptions) {}
+    public async buildForArticle(articleId:string):Promise<MarkdownBase>{
 
-    public build():MarkdownBase{
+        let dataStore:any = {};
+        await this.resolveArticleData(articleId, dataStore);
+
         let markdownIt = new MarkdownIt(this.markdownOptions);
         let markdown = new MarkdownBase(markdownIt);
         return markdown;
+    }
+
+    private resolveArticleData(articleId:string, dataStore:any):Promise<null>{
+        return new Promise((resolve, reject)=>{
+            let forkedObservable = forkJoin(this.entryResolvers.map(entryResolver => entryResolver.resolveArticleData(articleId, dataStore)));
+
+            forkedObservable.subscribe(
+                (completedObservables:any)=>{
+                    resolve();
+                },
+                (error) => {
+                    reject(error);
+                }
+            );
+        });
     }
 }
