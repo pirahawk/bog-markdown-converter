@@ -1,6 +1,5 @@
 import { IBogRouteHandler } from "../core/IBogRouteHandler";
 import * as express from "express";
-import { MarkdownBase } from "../markdownIt/MarkdownBase";
 import { MarkdownFactory } from "../markdownIt/MarkdownFactory";
 
 export class MarkdownConvertRouteHandler implements IBogRouteHandler {
@@ -15,12 +14,17 @@ export class MarkdownConvertRouteHandler implements IBogRouteHandler {
         let articleId = request.params.articleId as string;
         let requestContent = request.body as string;
         
-        this.markdownFactory.buildForArticle(articleId).then((markdownItBase)=>{
+        this.markdownFactory.buildForArticle(articleId)
+        .then((markdownItBase)=>{
 
             let renderedContent = markdownItBase.render(requestContent);
             
             response.contentType('text/html');
             response.send(renderedContent);
+        })
+        .catch((error)=>{
+            response.statusCode = 500;
+            response.send();
         });
     }
 }

@@ -1,5 +1,5 @@
-import { Observable } from "rxjs";
+import { MarkdownDataStore } from "../models/MarkdownDataStore";
 
 export interface IArticleDetailsResolver {
-    resolveArticleData(articleId:string, dataStore:any): Observable<any>
+    resolveArticle(articleId:string, dataStore:MarkdownDataStore): Promise<any>;
 }
