@@ -7,7 +7,7 @@ import { LinkRelationValues } from "../values/LinkRelationValues";
 import { ArticleMediaLookupResponse } from "../models/http/ArticleMediaLookupResponse";
 import { MarkdownDataStore } from "../models/MarkdownDataStore";
 
-export class GetEntryDetailsCoordinator implements IArticleDetailsResolver {
+export class ResolveArticleDataCoordinator implements IArticleDetailsResolver {
     constructor(private bogMarkdownOptions: BogMarkdownOptions) { }
 
     public resolveArticle(articleId: string, dataStore: MarkdownDataStore): Promise<ArticleMediaLookupResponse> {

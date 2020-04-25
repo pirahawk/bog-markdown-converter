@@ -6,7 +6,9 @@ import { PingRouteHandler } from "../handlers/PingRouteHandler";
 import { MarkdownFactory } from "../markdownIt/MarkdownFactory";
 import { BogMarkdownOptions } from "../markdownIt/MarkdownOptions";
 import { MarkdownConvertRouteHandler } from "../handlers/MarkdownConvertRouteHandler";
-import { GetEntryDetailsCoordinator } from "../domain/coordinators/GetEntryDetailsCoordinator";
+import { ResolveArticleDataCoordinator } from "../domain/coordinators/ResolveArticleDataCoordinator";
+import { MarkdownItRulesFactory } from "../markdownIt/MarkdownItRulesFactory";
+import { BogImageRenderStrategy } from "../domain/renderStrategies/BogImageRenderStrategy";
 
 export class ServerStartup {
     private markdownItFactory?: MarkdownFactory;
@@ -19,8 +21,12 @@ export class ServerStartup {
         expressApp.use(bodyParser.json());
         expressApp.use(bodyParser.text());
 
-        let getEntryDetailsCoordinator = new GetEntryDetailsCoordinator(this.bogMarkdownOptions);
-        this.markdownItFactory = new MarkdownFactory(this.bogMarkdownOptions, [getEntryDetailsCoordinator]);
+        let markdownRulesFactory = new MarkdownItRulesFactory([
+            new BogImageRenderStrategy()
+        ]);
+        this.markdownItFactory = new MarkdownFactory(this.bogMarkdownOptions, markdownRulesFactory, [
+            new ResolveArticleDataCoordinator(this.bogMarkdownOptions)
+        ]);
     }
 
     public configure(expressApp: express.Application, routeBuilder:RouteBuilder) {

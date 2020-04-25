@@ -3,9 +3,12 @@ import { BogMarkdownOptions } from "./MarkdownOptions";
 import { MarkdownBase } from "./MarkdownBase";
 import { IArticleDetailsResolver } from "../domain/coordinators/IArticleDetailsResolver";
 import { MarkdownDataStore } from "../domain/models/MarkdownDataStore";
+import { MarkdownItRulesFactory } from "./MarkdownItRulesFactory";
 
 export class MarkdownFactory{
-    constructor(private markdownOptions:BogMarkdownOptions, private entryResolvers:IArticleDetailsResolver[]) {}
+    constructor(private markdownOptions:BogMarkdownOptions, 
+        private markdownRulesFactory:MarkdownItRulesFactory, 
+        private entryResolvers:IArticleDetailsResolver[]) {}
 
     public async buildForArticle(articleId:string):Promise<MarkdownBase>{
         let dataStore:MarkdownDataStore = {} as MarkdownDataStore;
@@ -19,6 +22,7 @@ export class MarkdownFactory{
         }
 
         let markdownIt = new MarkdownIt(this.markdownOptions);
+        this.markdownRulesFactory.build(markdownIt, dataStore);
         let markdown = new MarkdownBase(markdownIt);
         return markdown;
     }
