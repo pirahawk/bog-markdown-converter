@@ -1,7 +1,7 @@
 // unfortunately this does not seem to work for the time being!
 
 
-var path = require('path');
+let path = require('path');
 
 module.exports = {
     entry: {

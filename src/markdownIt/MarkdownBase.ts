@@ -4,7 +4,7 @@ export class MarkdownBase {
     constructor(private markdownIt: MarkdownIt) { }
 
     render(requestContent: string): string {
-        var renderedContent = this.markdownIt.render(requestContent);
+        let renderedContent = this.markdownIt.render(requestContent);
         return renderedContent;
     }
 }
