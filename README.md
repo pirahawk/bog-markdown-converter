@@ -1,0 +1,1 @@
+Project Build status: ![](https://github.com/pirahawk/bog-markdown-converter/workflows/bog-markdown-converter-build/badge.svg)
