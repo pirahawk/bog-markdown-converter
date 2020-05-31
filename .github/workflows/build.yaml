@@ -1,0 +1,71 @@
+name: bog-markdown-converter-build
+on: [push]
+
+jobs:
+  build_nuget:
+    name: Build Converter Application
+    runs-on: ubuntu-latest
+    steps:
+       
+    - name: setup-nodejs
+      uses: actions/setup-node@v1
+      # with:
+      #   dotnet-version: '3.1.100'
+
+    # - name: setup-nuget
+    #   uses: nuget/setup-nuget@v1
+    #   with:
+    #     nuget-version: 'latest'
+
+    - name: checkout-repo
+      uses: actions/checkout@v2
+      with:
+        clean: 'true'
+
+    - name: build-app
+      run: tsc
+
+    # - name: echo-things
+    #   run: echo '${{github.workspace}} - ${{github.run_id}} - ${{github.run_number}}'
+    
+    # - name: setup-nuget-source
+    #   run: nuget sources add -Name "github" -Source "https://nuget.pkg.github.com/pirahawk/index.json" -username "pirahawk" -password "${{secrets.GITHUB_TOKEN}}" -StorePasswordInClearText -configfile ./nuget.config
+
+    # - name: build-dotnet
+    #   run: dotnet build --nologo
+    
+    # - name: pack-nuget-packages-master
+    #   if:  github.event_name == 'push' && github.ref == 'refs/heads/master'
+    #   run: dotnet pack -o ./nugetPublish --nologo  /p:version=1.0.${{github.run_number}}
+    
+    # - name: pack-nuget-packages-pre-release
+    #   if:  github.event_name == 'push' && github.ref != 'refs/heads/master'
+    #   run: dotnet pack -o ./nugetPublish --nologo  /p:version=1.0.${{github.run_number}}-alpha
+
+    # - name: push-common-nuget-to-package-store
+    #   run: dotnet nuget push ./nugetPublish/*Common.[1-9]*.nupkg -s 'github'
+    
+    # - name: push-domain-nuget-to-package-store
+    #   run: dotnet nuget push ./nugetPublish/*Domain.[1-9]*.nupkg -s 'github'
+
+    # - name: print-directory 
+    #   run: ls -la ./nugetPublish
+
+
+
+  # run_tests:
+  #   name: Run Tests
+  #   runs-on: ubuntu-latest
+  #   steps:     
+  #   - name: setup-dotnet
+  #     uses: actions/setup-dotnet@v1
+  #     with:
+  #       dotnet-version: '3.1.100'
+      
+  #   - name: checkout-repo
+  #     uses: actions/checkout@v2
+  #     with:
+  #       clean: 'true'
+
+  #   - name: run-tests
+  #     run: dotnet test --nologo
