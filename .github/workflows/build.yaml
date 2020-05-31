@@ -23,7 +23,7 @@ jobs:
         clean: 'true'
 
     - name: build-app
-      run: tsc
+      run: npm run build-pipeline
 
     # - name: echo-things
     #   run: echo '${{github.workspace}} - ${{github.run_id}} - ${{github.run_number}}'

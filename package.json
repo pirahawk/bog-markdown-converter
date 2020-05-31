@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-debug": "webpack --mode=development --watch",
-    "start": "tsc && node --inspect ./bin/index.js"
+    "start": "tsc && node --inspect ./bin/index.js",
+    "build-pipeline": "npm install && tsc"
   },
   "repository": {
     "type": "git",
