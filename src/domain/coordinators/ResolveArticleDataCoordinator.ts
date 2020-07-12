@@ -13,7 +13,11 @@ export class ResolveArticleDataCoordinator implements IArticleDetailsResolver {
     public resolveArticle(articleId: string, dataStore: MarkdownDataStore): Promise<ArticleMediaLookupResponse> {
         return new Promise((resolve, reject) => {
             let getArticleUrl: string = `${this.bogMarkdownOptions.bogApiUrl}/api/article/${articleId}`;
-            let requestObservable: Observable<RxHttpRequestResponse<any>> = RxHR.get(getArticleUrl);
+            let requestObservable: Observable<RxHttpRequestResponse<any>> = RxHR.get(getArticleUrl,{
+                headers:{
+                    "bog-api-k": this.bogMarkdownOptions.bogApiKey
+                }
+            });
 
             requestObservable.subscribe(
                 response => this.handleGetArticleResponse(response, dataStore, getArticleUrl, resolve, reject),
@@ -44,7 +48,11 @@ export class ResolveArticleDataCoordinator implements IArticleDetailsResolver {
         let mediaLookupLink = articleResponse.links.find(link => link.relation === LinkRelationValues.MEDIA_LOOKUP);
 
         let getMediaLookupUrl: string = `${this.bogMarkdownOptions.bogApiUrl}${mediaLookupLink?.href}`;
-        let requestObservable: Observable<RxHttpRequestResponse<any>> = RxHR.get(getMediaLookupUrl);
+        let requestObservable: Observable<RxHttpRequestResponse<any>> = RxHR.get(getMediaLookupUrl, {
+            headers:{
+                "bog-api-k": this.bogMarkdownOptions.bogApiKey
+            }
+        });
 
         requestObservable.subscribe(
             response => this.handleGetMediaLookupResponse(response, dataStore, getMediaLookupUrl, resolve, reject),
