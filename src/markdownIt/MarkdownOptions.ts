@@ -17,3 +17,5 @@ export class BogMarkdownOptions implements markdownIt.Options {
         return `${this.bogApiScheme}://${this.bogApiHost}`;
     }
 }
+
+
