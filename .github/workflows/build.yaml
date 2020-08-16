@@ -2,8 +2,8 @@ name: bog-markdown-converter-build
 on: [push]
 
 jobs:
-  build_nuget:
-    name: Build Converter Application
+  build_npm:
+    name: Build nodejs Application
     runs-on: ubuntu-latest
     steps:
        
@@ -22,3 +22,20 @@ jobs:
 
     # - name: echo-things
     #   run: echo '${{github.workspace}} - ${{github.run_id}} - ${{github.run_number}}'
+
+  build_docker:
+    name: Publish docker image
+    needs: [build_npm]
+    if:  github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: publish-docker-image
+      if:  github.event_name == 'push' && github.ref == 'refs/heads/master'
+      uses: docker/build-push-action@v1
+      with:
+        username: "pirahawk"
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        repository: pirahawk/bog-markdown-converter/bogmarkdownconverter
+        tags: ${{github.run_number}},latest 
