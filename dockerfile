@@ -1,7 +1,7 @@
 FROM node:12
-WORKDIR /bogapi
-COPY . .
-RUN npm install
-RUN npm run build-pipeline 
-EXPOSE 8080
-ENTRYPOINT ["node", "./bin/index.js"]
+    WORKDIR /usr/bogMdConverter
+    COPY package.json .
+    RUN npm install
+    COPY . .
+    RUN tsc
+    CMD ["node", "./bin/index.js"]
