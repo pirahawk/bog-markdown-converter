@@ -1,23 +1,10 @@
-
 //import * as express from "express";
-
-import { ServerConfiguration } from "./core/ServerConfiguration";
 import { ServerRunner } from "./core/ServerRunner";
-import { BogMarkdownOptions } from "./markdownIt/MarkdownOptions";
+import { MarkdownOptionsFactory } from "./markdownIt/MarkdownOptionsFactory";
 
-let expressPort:number = parseInt(process.env.EXPRESS_PORT as string);
-let bogApiHost:string = process.env.BOG_API_HOST as string;
-let bogApiScheme:string = process.env.BOG_API_SCHEME as string;
-let bogApiKey:string = process.env.BOG_API_KEY as string;
-
-let serverConfiguration:ServerConfiguration = {
-    port: expressPort
-};
-
-let markdownOptions = new BogMarkdownOptions();
-markdownOptions.bogApiScheme = bogApiScheme;
-markdownOptions.bogApiHost = bogApiHost;
-markdownOptions.bogApiKey = bogApiKey;
+let optionsFactory = new MarkdownOptionsFactory();
+let serverConfiguration = optionsFactory.serverConfiguration;
+let markdownOptions = optionsFactory.bogMarkdownOptions;
 
 let serverRunner = new ServerRunner();
 serverRunner.run(serverConfiguration, markdownOptions);
