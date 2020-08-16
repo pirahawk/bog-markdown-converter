@@ -30,6 +30,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: checkout-repo
+      uses: actions/checkout@v2
+      with:
+        clean: 'true'
+
     - name: publish-docker-image
       if:  github.event_name == 'push' && github.ref == 'refs/heads/master'
       uses: docker/build-push-action@v1
