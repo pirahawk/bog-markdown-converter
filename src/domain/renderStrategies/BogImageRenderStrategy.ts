@@ -42,9 +42,9 @@ export class BogImageRenderStrategy implements IMarkdownItStrategy{
             mappedLink = this.tryResolveBogUri(sourceLink, bogDataStore);
         }
 
-        return this.renderImageDom(isWebLink, mappedLink, content, linkParseModel?.classAttributes);
+        return this.renderImageDom(isWebLink, mappedLink, content, linkParseModel?.classAttributes ?? []);
     }
-    renderImageDom(isWebLink: boolean, mappedLink: string, content:string, customClassAttributes:string[]|undefined|null): string | void {
+    renderImageDom(isWebLink: boolean, mappedLink: string, content:string, customClassAttributes:string[]): string | void {
         let classList = [`bogMedia`];
         
         if(isWebLink){
