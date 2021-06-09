@@ -40,7 +40,7 @@ export class MarkdownFactory{
         }
 
         return new Promise((resolve, reject)=>{
-            resolve();
+            resolve(null);
         });
     }
 }

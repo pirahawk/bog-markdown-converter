@@ -29,7 +29,7 @@ export class ResolveArticleDataCoordinator implements IArticleDetailsResolver {
     handleGetArticleResponse(response: RxHttpRequestResponse<any>,
         dataStore: MarkdownDataStore,
         getArticleUrl: string,
-        resolve: (value?: ArticleMediaLookupResponse | PromiseLike<ArticleMediaLookupResponse> | undefined) => void,
+        resolve: (value: ArticleMediaLookupResponse | PromiseLike<ArticleMediaLookupResponse>) => void,
         reject: (reason?: any) => void): void {
 
         if (response.response.statusCode >= 400 || !response.body) {
@@ -62,7 +62,7 @@ export class ResolveArticleDataCoordinator implements IArticleDetailsResolver {
     handleGetMediaLookupResponse(response: RxHttpRequestResponse<any>,
         dataStore: MarkdownDataStore,
         getMediaLookupUrl: string,
-        resolve: (value?: ArticleMediaLookupResponse | PromiseLike<ArticleMediaLookupResponse> | undefined) => void,
+        resolve: (value: ArticleMediaLookupResponse | PromiseLike<ArticleMediaLookupResponse>) => void,
         reject: (reason?: any) => void): void {
 
         if (response.response.statusCode >= 400 || !response.body) {
