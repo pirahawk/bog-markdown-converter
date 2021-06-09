@@ -17,9 +17,9 @@ export class ServerStartup {
     }
 
     public setup(expressApp: express.Application):void{
-        expressApp.use(bodyParser.urlencoded());
-        expressApp.use(bodyParser.json());
-        expressApp.use(bodyParser.text());
+        expressApp.use(express.urlencoded({ extended: true }));
+        expressApp.use(express.json());
+        expressApp.use(express.text());
 
         let markdownRulesFactory = new MarkdownItRulesFactory([
             new BogImageRenderStrategy()
