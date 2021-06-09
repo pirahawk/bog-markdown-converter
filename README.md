@@ -1,1 +1,2 @@
-Project Build status: ![](https://github.com/pirahawk/bog-markdown-converter/workflows/bog-markdown-converter-build/badge.svg)
+Project Build status:
+[![bog-markdown-converter-build](https://github.com/pirahawk/bog-markdown-converter/actions/workflows/build.yaml/badge.svg)](https://github.com/pirahawk/bog-markdown-converter/actions/workflows/build.yaml)
