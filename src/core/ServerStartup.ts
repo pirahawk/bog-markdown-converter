@@ -31,6 +31,7 @@ export class ServerStartup {
 
     public configure(expressApp: express.Application, routeBuilder:RouteBuilder) {
        routeBuilder.get('/', expressApp, new PingRouteHandler());
+       routeBuilder.get('/ping', expressApp, new PingRouteHandler());
        routeBuilder.post('/convert/:articleId([\\d\\w-]{36,38})', expressApp, new MarkdownConvertRouteHandler(this.markdownItFactory as MarkdownFactory));
     }
 }

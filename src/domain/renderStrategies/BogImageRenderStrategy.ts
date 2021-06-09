@@ -3,6 +3,7 @@ import Token from "markdown-it/lib/token";
 
 import { MarkdownDataStore } from "../models/MarkdownDataStore";
 import { IMarkdownItStrategy } from "../../markdownIt/IMarkdownItStrategy";
+import { HrefLinkClassParsingStrategy } from "./HrefLinkClassParsingStrategy";
 
 export class BogImageRenderStrategy implements IMarkdownItStrategy{
 
@@ -30,7 +31,9 @@ export class BogImageRenderStrategy implements IMarkdownItStrategy{
         console.log(token);
         let tokenAttributes = token.attrs as string[][];
         let sourceAttribute = tokenAttributes.find(tknAttr => tknAttr[0] === 'src');
-        let sourceLink = (sourceAttribute as string[])[1];
+        let sourceLinkRaw = (sourceAttribute as string[])[1];
+        let linkParseModel = HrefLinkClassParsingStrategy.tryParseHrefLink(sourceLinkRaw);
+        let sourceLink = linkParseModel?.link as string;
         let isWebLink = this.isWebLink(sourceLink);
         let mappedLink: string = sourceLink;
         let content:string = token.content;
@@ -39,9 +42,9 @@ export class BogImageRenderStrategy implements IMarkdownItStrategy{
             mappedLink = this.tryResolveBogUri(sourceLink, bogDataStore);
         }
 
-        return this.renderImageDom(isWebLink, mappedLink, content);
+        return this.renderImageDom(isWebLink, mappedLink, content, linkParseModel?.classAttributes);
     }
-    renderImageDom(isWebLink: boolean, mappedLink: string, content:string): string | void {
+    renderImageDom(isWebLink: boolean, mappedLink: string, content:string, customClassAttributes:string[]|undefined|null): string | void {
         let classList = [`bogMedia`];
         
         if(isWebLink){
@@ -52,12 +55,16 @@ export class BogImageRenderStrategy implements IMarkdownItStrategy{
             classList.push('unmapped');
         }
 
+        if(customClassAttributes){
+            classList = classList.concat(customClassAttributes);
+        }
+
         let imgClasses = classList.reduce((previous, current, index, arr)=>{
             if(!previous){
                 return current;
             }
 
-            return `${previous}, ${current}`;
+            return `${previous} ${current}`;
         });
 
         return `<img src="${mappedLink}" alt="${content}" class="${imgClasses}">`;
