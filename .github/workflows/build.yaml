@@ -48,7 +48,8 @@ jobs:
       if:  github.event_name == 'push' && github.ref == 'refs/heads/master'
       uses: docker/login-action@v1
       with:
-        username: "pirahawk"
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
       
     - name: docker-push
