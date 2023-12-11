@@ -5,7 +5,7 @@ import { MarkdownDataStore } from "../models/MarkdownDataStore";
 import { IMarkdownItStrategy } from "../../markdownIt/IMarkdownItStrategy";
 import { HrefLinkClassParsingStrategy } from "./HrefLinkClassParsingStrategy";
 
-export class BogImageRenderStrategy implements IMarkdownItStrategy{
+export class ImageRenderStrategy implements IMarkdownItStrategy{
 
     attach(markdownIt:MarkdownIt, bogDataStore:MarkdownDataStore): void {
         let defaultImageRule = markdownIt.renderer.rules.image;

@@ -8,7 +8,9 @@ import { BogMarkdownOptions } from "../markdownIt/MarkdownOptions";
 import { MarkdownConvertRouteHandler } from "../handlers/MarkdownConvertRouteHandler";
 import { ResolveArticleDataCoordinator } from "../domain/coordinators/ResolveArticleDataCoordinator";
 import { MarkdownItRulesFactory } from "../markdownIt/MarkdownItRulesFactory";
-import { BogImageRenderStrategy } from "../domain/renderStrategies/BogImageRenderStrategy";
+import { ImageRenderStrategy } from "../domain/renderStrategies/ImageRenderStrategy";
+import { HrefLinkRenderStrategy } from "../domain/renderStrategies/HrefLinkRenderStrategy";
+import { MdRulesPlayPen } from "../domain/renderStrategies/MdRulesPlayPen";
 
 export class ServerStartup {
     private markdownItFactory?: MarkdownFactory;
@@ -22,7 +24,9 @@ export class ServerStartup {
         expressApp.use(express.text());
 
         let markdownRulesFactory = new MarkdownItRulesFactory([
-            new BogImageRenderStrategy()
+            new ImageRenderStrategy(),
+            new HrefLinkRenderStrategy(),
+            new MdRulesPlayPen(),
         ]);
         this.markdownItFactory = new MarkdownFactory(this.bogMarkdownOptions, markdownRulesFactory, [
             new ResolveArticleDataCoordinator(this.bogMarkdownOptions)
